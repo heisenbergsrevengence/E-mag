@@ -1,17 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3nvj27a8blyc"]
 
 [ext_resource type="Script" path="res://mapgen.gd" id="1_yylh3"]
-[ext_resource type="Texture2D" uid="uid://br43mme5ocu6c" path="res://icon.svg" id="2_eg7dk"]
+[ext_resource type="Texture2D" uid="uid://d2lrxahdw1ht2" path="res://testtilemap.png" id="2_3jpjh"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_awe6u"]
-texture = ExtResource("2_eg7dk")
-1:1/0 = 0
-1:1/0/modulate = Color(0, 10.06, 0, 1)
-6:1/0 = 0
-6:1/0/modulate = Color(100, 0, 0, 1)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yo3t1"]
+texture = ExtResource("2_3jpjh")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_7mr2e"]
-sources/0 = SubResource("TileSetAtlasSource_awe6u")
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_yo3t1")
 
 [node name="mapgen" type="Node2D"]
 script = ExtResource("1_yylh3")
@@ -21,4 +25,12 @@ tile_set = SubResource("TileSet_7mr2e")
 format = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.1, 0.1)
+zoom = Vector2(0.25, 0.25)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 225.0
+offset_bottom = 26.0
+scale = Vector2(4, 4)
+text = "Press space to explore map..."
