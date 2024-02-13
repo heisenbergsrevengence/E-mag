@@ -5,8 +5,8 @@ extends Node2D
 var gatewayScenes = [preload("res://gateways/gateway0.tscn")]
 var playerScene = preload("res://player.tscn")
 
-var forestTile = Vector2i(0,0)
-var wallTile = Vector2i(1,0)
+var forestTiles = [Vector2i(0,0),Vector2i(0,1),Vector2i(0,2),Vector2i(0,3),Vector2i(0,4), Vector2i(0,5), Vector2i(0,5), Vector2i(0,5)]
+var wallTiles = [Vector2i(1,0),Vector2i(1,1),Vector2i(1,2),Vector2i(1,3),Vector2i(1,4), Vector2i(1,5), Vector2i(1,5), Vector2i(1,5)]
 
 var neighFour = [Vector2i(1,0), Vector2i(0,1), Vector2i(-1,0), Vector2i(0,-1)]
 var neighEight = [Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1), Vector2i(-1, 1), 
@@ -97,20 +97,20 @@ func _ready():
 	for i in gatewayCoords:
 		for x in range(-8, 8):
 			for y in range(-8,8):
-				tileMap.set_cell(0,i+Vector2i(x,y),0,forestTile)
+				tileMap.set_cell(0,i+Vector2i(x,y),0,forestTiles.pick_random())
 				for j in neighFour:
 					if tileMap.get_cell_atlas_coords(0, i+Vector2i(x,y)+j) == Vector2i(-1,-1):
-						tileMap.set_cell(0,i+Vector2i(x,y)+j,0,wallTile)
+						tileMap.set_cell(0,i+Vector2i(x,y)+j,0,wallTiles.pick_random())
 		
 	print("avoidance running")
 	for i in pathWayCoords:
 		var points = walker(i, gatewayCoords)
 		for j in points:
-			tileMap.set_cell(0,j,0,forestTile)
+			tileMap.set_cell(0,j,0,forestTiles.pick_random())
 			#this is part two of not greatness to block the player in
 			for k in neighFour:
 				if tileMap.get_cell_atlas_coords(0, j+Vector2(k)) == Vector2i(-1,-1):
-					tileMap.set_cell(0,j+Vector2(k),0,wallTile)
+					tileMap.set_cell(0,j+Vector2(k),0,wallTiles.pick_random())
 					
 func generate_gateways(amount):
 	var _gateways = []
