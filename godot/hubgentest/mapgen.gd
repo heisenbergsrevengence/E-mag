@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var tileMap = $TileMap
 
-var gatewayScenes = [preload("res://gateways/gateway0.tscn")]
+var gatewayScenes = [preload("res://gateways/gateway0.tscn"), preload("res://gateways/gateway1.tscn")]
 var playerScene = preload("res://player.tscn")
 
 var forestTiles = [Vector2i(0,0),Vector2i(0,1),Vector2i(0,2),Vector2i(0,3),Vector2i(0,4), Vector2i(0,5), Vector2i(0,5), Vector2i(0,5)]
@@ -44,7 +44,7 @@ func _ready():
 	gateways = generate_gateways(gatewayAmount)
 	
 	for i in gateways:
-		add_child(i)
+#		add_child(i)
 		gatewayCoords.append(tileMap.local_to_map(i.position))
 	
 	
@@ -94,23 +94,29 @@ func _ready():
 		pathWayCoords.append(endConnector)
 	
 	#this is not great, just to block the player in
-	for i in gatewayCoords:
-		for x in range(-8, 8):
-			for y in range(-8,8):
-				tileMap.set_cell(0,i+Vector2i(x,y),0,forestTiles.pick_random())
-				for j in neighFour:
-					if tileMap.get_cell_atlas_coords(0, i+Vector2i(x,y)+j) == Vector2i(-1,-1):
-						tileMap.set_cell(0,i+Vector2i(x,y)+j,0,wallTiles.pick_random())
+#	for i in gatewayCoords:
+#		for x in range(-8, 8):
+#			for y in range(-8,8):
+#				tileMap.set_cell(0,i+Vector2i(x,y),0,forestTiles.pick_random())
+#				for j in neighFour:
+#					if tileMap.get_cell_atlas_coords(0, i+Vector2i(x,y)+j) == Vector2i(-1,-1):
+#						tileMap.set_cell(0,i+Vector2i(x,y)+j,0,wallTiles.pick_random())
 		
-	print("avoidance running")
+#	print("avoidance running")
 	for i in pathWayCoords:
 		var points = walker(i, gatewayCoords)
 		for j in points:
-			tileMap.set_cell(0,j,0,forestTiles.pick_random())
-			#this is part two of not greatness to block the player in
-			for k in neighFour:
-				if tileMap.get_cell_atlas_coords(0, j+Vector2(k)) == Vector2i(-1,-1):
-					tileMap.set_cell(0,j+Vector2(k),0,wallTiles.pick_random())
+			if tileMap.get_cell_atlas_coords(0, j) == Vector2i(-1,-1):
+				tileMap.set_cell(0,j,0,forestTiles.pick_random())
+				#this is part two of not greatness to block the player in
+#				for k in neighFour:
+#					if tileMap.get_cell_atlas_coords(0, j+Vector2(k)) == Vector2i(-1,-1):
+#						tileMap.set_cell(0,j+Vector2(k),0,wallTiles.pick_random())
+	for i in tileMap.get_used_cells(0):
+		if tileMap.get_cell_tile_data(0, i).get_custom_data("floor"):
+			for j in neighFour:
+				if tileMap.get_cell_atlas_coords(0, i+j) == Vector2i(-1,-1):
+					tileMap.set_cell(0,i+j,0,wallTiles.pick_random())
 					
 func generate_gateways(amount):
 	var _gateways = []
@@ -131,9 +137,19 @@ func generate_gateways(amount):
 				var neighbour = gatewayCentre + i
 				if neighbour.x in range(0, gridSize) and neighbour.y in range(0, gridSize):
 					grid[neighbour.x][neighbour.y] = 1
-					
+			
+			gatewayCentre = (gatewayCentre * gridCellSize) - (Vector2i(1,1) * (gridCellSize*gridSize/2))
+			
 			var gateway = gatewayScenes.pick_random().instantiate()
-			gateway.position = (gatewayCentre * gridCellSize) - (Vector2i(1,1) * (gridCellSize*gridSize/2))
+			var gatewayTileMap = gateway.get_node("TileMap")
+			var gatewayTiles = gatewayTileMap.get_used_cells(0)
+			var gatewaySize = gatewayTileMap.get_used_rect().size
+			
+			for i in gatewayTiles:
+				var atlasCoord = gatewayTileMap.get_cell_atlas_coords(0, i)
+				tileMap.set_cell(0, tileMap.local_to_map(gatewayCentre)+i, 0, atlasCoord)
+				
+			gateway.position = gatewayCentre 
 			_gateways.append(gateway)
 	return _gateways
 	
@@ -180,7 +196,7 @@ func find_tri_edges(points):
 	return pathVectors
 
 func walker(points, obstacles):
-	print("avoidance running")
+#	print("avoidance running")
 	var start = Vector2(points[0])
 	var end = Vector2(points[1])
 	var walkerPoints = []
@@ -199,10 +215,10 @@ func walker(points, obstacles):
 				
 		for i in neighFour:
 			var weight = 0
-			if (start+Vector2(i)).distance_to(nearestObstacle) > pathwayAvoidanceDist:
-				weight = (start+Vector2(i)).distance_to(end)
-				weights.append((1/exp(weight)))
-				totalWeight += (1/exp(weight))
+#			if (start+Vector2(i)).distance_to(nearestObstacle) > pathwayAvoidanceDist:
+			weight = (start+Vector2(i)).distance_to(end)
+			weights.append((1/exp(weight)))
+			totalWeight += (1/exp(weight))
 		
 		if !totalWeight:
 			weights.clear()
