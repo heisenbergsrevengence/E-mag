@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dggca86gcovxm"
-path="res://.godot/imported/testplayer.png-224e11b76c82c8d4927d6037991e4258.ctex"
+uid="uid://b6p3x724ddfkk"
+path="res://.godot/imported/mazetilemap.png-679d14c67075990cab4d1f2fb4c318db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://testplayer.png"
-dest_files=["res://.godot/imported/testplayer.png-224e11b76c82c8d4927d6037991e4258.ctex"]
+source_file="res://tilemaps/mazetilemap.png"
+dest_files=["res://.godot/imported/mazetilemap.png-679d14c67075990cab4d1f2fb4c318db.ctex"]
 
 [params]
 
