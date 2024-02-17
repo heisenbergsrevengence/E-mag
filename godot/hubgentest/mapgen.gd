@@ -6,7 +6,7 @@ var gatewayScenes = [preload("res://gateways/gateway0.tscn"), preload("res://gat
 var playerScene = preload("res://player.tscn")
 
 var floorTile = Vector2i(0,0)
-var blackTile = Vector2i(0,0)
+var blackTile = Vector2i(2,1)
 var wallTile = Vector2i(1,0)
 
 var neighFour = [Vector2i(1,0), Vector2i(0,1), Vector2i(-1,0), Vector2i(0,-1)]
@@ -27,6 +27,10 @@ var neighEight = [Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1), Vector2i(-1, 1
 @export var pathwayAvoidanceDist = 0	#default 11
 
 var is_mapPreview = true
+var player
+var screenBuffer
+var cameraTarget
+var instantCamera = true
 
 var gateways = []
 
@@ -37,6 +41,9 @@ var pointDraw = []
 var connectorsDraw = []
 
 func _ready():
+	screenBuffer = get_viewport_rect().size/4
+	print(screenBuffer)
+	
 	var gatewayCoords = []
 	var connections = []
 	var pathWays = []
@@ -50,8 +57,7 @@ func _ready():
 	
 	for i in gateways:
 		gatewayCoords.append(tileMap.local_to_map(i.position))
-		
-		##NEW CODE HERE##
+
 		var gateway = i
 		var gatewayTileMap = gateway.get_node("TileMap")
 		var size = Vector2(gatewayTileMap.get_used_rect().size)
@@ -99,7 +105,6 @@ func _ready():
 					paths.append([start, end])
 					start = end
 		gatewayPaths[i] = paths
-	##NEW CODE END##
 	
 	for i in gateways:
 		pathDraw.append(gatewayPaths[i])
@@ -125,7 +130,6 @@ func _ready():
 	
 	var gatewayInterconnect = []
 	for i in pathWays:
-#		##NEW CODE HERE1##
 		var points1 = []
 		var points2 = []
 		for g in gatewayPaths[i[0]]:
@@ -137,7 +141,6 @@ func _ready():
 		var obstacles = []
 		for j in gateways:
 			var gatePos = j.global_position
-#			if j != i[0] and j != i[1]:
 			var closestPoint = Geometry2D.get_closest_point_to_segment(gatePos, i[0].global_position, i[1].global_position)
 			if gatePos.distance_to(closestPoint) < 640: #40 tiles distance
 				var rect = gatewayPaths[j]
@@ -157,60 +160,7 @@ func _ready():
 				if is_valid:
 					gatewayInterconnect.append([j, k])
 					pathDraw.append([j, k])
-		##NEW CODE ENDS1##
-		
-		##NEW CODE HERE##
-#		var point1 = Vector2.ZERO
-#		var point2 = Vector2.ZERO
-#		var minDist = INF
-#		var closest = Vector2.ZERO
-#		for j in gatewayPaths[i[0]]:
-#			var closestEntry = Vector2.ZERO
-#			var testDist = j[0].distance_to(i[1].global_position)
-#			if testDist < minDist:
-#				minDist = testDist
-#				closest = j[0]
-#			point1 = closest
-#
-#		minDist = INF
-#		closest = Vector2.ZERO
-#		for j in gatewayPaths[i[1]]:
-#			var testDist = j[0].distance_to(point1)
-#			if testDist < minDist:
-#				minDist = testDist
-#				closest = j[0]
-#			point2 = closest
-#
-#		pathWayCoords.append([tileMap.local_to_map(point1), tileMap.local_to_map(point2)])
-#		pathDraw.append([point1,point2])
-		##NEW CODE ENDS
-		
-#		var point1 = Vector2.ZERO
-#		var point2 = Vector2.ZERO
-#		var startConnector = []
-#		var endConnector = []
-#
-#		var minDist = INF
-#		var closest = Vector2.ZERO
-#		for j in i[0].get_node("entry_points").get_children():
-#			if j.global_position.distance_to(i[1].global_position) < minDist:
-#				minDist = j.global_position.distance_to(i[1].global_position)
-#				closest = j.global_position + (Vector2.RIGHT.rotated(i[0].global_position.angle_to_point(j.global_position))*entryWayDist)
-#				startConnector = [tileMap.local_to_map(j.global_position), tileMap.local_to_map(closest)]
-#		point1 = closest
-#
-#		minDist = INF
-#		closest = Vector2.ZERO
-#		for j in i[1].get_node("entry_points").get_children():
-#			if j.global_position.distance_to(i[0].global_position) < minDist:
-#				minDist = j.global_position.distance_to(i[0].global_position)
-#				closest = j.global_position + (Vector2.RIGHT.rotated(i[1].global_position.angle_to_point(j.global_position))*entryWayDist)
-#				endConnector = [tileMap.local_to_map(closest), tileMap.local_to_map(j.global_position)]
-#		point2 = closest
-#
-#		gatewayExtensions.append(startConnector)
-#		pathWayCoords.append([tileMap.local_to_map(point1), tileMap.local_to_map(point2)])
-#		gatewayExtensions.append(endConnector)
+					
 	pathDraw.clear()
 	var pathsCombined = []
 	for i in gateways:
@@ -264,39 +214,6 @@ func _ready():
 			var id2 = aStarPath.get_closest_point(i[1])
 			if id1 != id2:
 				aStarPath.connect_points(id1, id2)
-			
-#			var id1 = aStarPath.get_available_point_id()
-#			if j[0] in addedPoints:
-#				id1 = aStarPath.get_closest_point(j[0])
-#			else:
-#				aStarPath.add_point(id1, j[0])
-#				addedPoints.append(j[0])
-#
-#			var id2 = aStarPath.get_available_point_id()
-#			if j[1] in addedPoints:
-#				id2 = aStarPath.get_closest_point(j[1])
-#			else:
-#				aStarPath.add_point(id1, j[1])
-#				addedPoints.append(j[1])
-#
-#			aStarPath.connect_points(id1, id2)
-#	for i in pathsCombined:
-		
-#		var id1 = aStarPath.get_available_point_id()
-#		if i[0] in addedPoints:
-#			id1 = aStarPath.get_closest_point(i[0])
-#		else:		
-#			aStarPath.add_point(id1, i[0])
-#			addedPoints.append(i[0])
-#
-#		var id2 = aStarPath.get_available_point_id()
-#		if i[1] in addedPoints:
-#			id1 = aStarPath.get_closest_point(i[1])
-#		else:
-#			aStarPath.add_point(id2, i[1])
-#			addedPoints.append(i[1])
-#
-#		aStarPath.connect_points(id1, id2)
 		
 	for i in pathWays:
 		var id1 = aStarPath.get_closest_point(i[0].global_position)
@@ -321,7 +238,12 @@ func _ready():
 			for j in neighFour:
 				if tileMap.get_cell_atlas_coords(0, i+j) == Vector2i(-1,-1):
 					tileMap.set_cell(0,i+j,0,wallTile)
-#					BetterTerrain.set_cell(tileMap, 0, i+j, 0)
+
+	for i in tileMap.get_used_cells(0):
+#		if tileMap.get_cell_tile_data(0, i).get_custom_data("floor"):
+		for j in neighFour:
+			if tileMap.get_cell_atlas_coords(0, i+j) == Vector2i(-1,-1):
+				tileMap.set_cell(0,i+j,0,wallTile)
 
 	var tileMapSize = tileMap.get_used_rect().size + Vector2i(30,30)
 	var tileMapPos = tileMap.get_used_rect().position - Vector2i(15,15)
@@ -349,7 +271,7 @@ func _ready():
 #	if pointDraw:
 #		for i in pointDraw:
 #			draw_circle(i, 5,Color.RED)
-					
+	print(get_viewport_rect())
 func generate_gateways(amount):
 	var _gateways = []
 	
@@ -501,9 +423,27 @@ func _process(delta):
 	if is_mapPreview:
 		if Input.is_action_just_released("ui_select"):
 			is_mapPreview = false
-			var player = playerScene.instantiate()
+			player = playerScene.instantiate()
 			player.position = gateways.pick_random().position
-			$Camera2D.enabled = false
+			$Camera2D.global_position = player.global_position
+			cameraTarget = $Camera2D.global_position
 			$CanvasLayer.visible = false
-			player.get_node("Camera2D").enabled = true
+			$Camera2D.zoom = Vector2(4,4)
 			add_child(player)
+	else:
+		if Input.is_action_just_released("ui_accept"):
+			instantCamera = !instantCamera
+		var playerOffset = (cameraTarget - player.global_position)
+		if playerOffset.x > screenBuffer.x/2 -16 and Input.is_action_pressed("ui_left"):
+			cameraTarget.x = cameraTarget.x - screenBuffer.x
+		if playerOffset.x < -screenBuffer.x/2 + 16 and Input.is_action_pressed("ui_right"):
+			cameraTarget.x = cameraTarget.x + screenBuffer.x
+		if playerOffset.y > screenBuffer.y/2 - 16 and Input.is_action_pressed("ui_up"):
+			cameraTarget.y = cameraTarget.y - screenBuffer.y
+		if playerOffset.y < -screenBuffer.y/2 + 16 and Input.is_action_pressed("ui_down"):
+			cameraTarget.y = cameraTarget.y + screenBuffer.y
+		if $Camera2D.global_position != cameraTarget:
+			if instantCamera:
+				$Camera2D.global_position = cameraTarget
+			else:
+				$Camera2D.global_position = $Camera2D.global_position.move_toward(cameraTarget, 32)
