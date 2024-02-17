@@ -1,0 +1,314 @@
+[gd_scene load_steps=5 format=3 uid="uid://df6j4xvke8ljv"]
+
+[ext_resource type="Texture2D" uid="uid://703ktqpkr7ru" path="res://testplayer.png" id="1_y5l7l"]
+[ext_resource type="Texture2D" uid="uid://cfm40v8vphyjr" path="res://Untitled.png" id="2_odr5a"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hwgnq"]
+texture = ExtResource("2_odr5a")
+texture_region_size = Vector2i(16, 48)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 16)
+1:0/0/metadata/_better_terrain = {
+4: [0],
+"type": 0
+}
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, 16)
+1:1/0/metadata/_better_terrain = {
+4: [0],
+12: [0],
+"type": 0
+}
+1:2/0 = 0
+1:2/0/texture_origin = Vector2i(0, 16)
+1:2/0/metadata/_better_terrain = {
+12: [0],
+"type": 0
+}
+1:4/0 = 0
+1:4/0/texture_origin = Vector2i(0, 16)
+1:4/0/metadata/_better_terrain = {
+"type": 0
+}
+3:4/0 = 0
+3:4/0/texture_origin = Vector2i(0, 16)
+3:4/0/metadata/_better_terrain = {
+0: [0],
+"type": 0
+}
+4:4/0 = 0
+4:4/0/texture_origin = Vector2i(0, 16)
+4:4/0/metadata/_better_terrain = {
+0: [0],
+8: [0],
+"type": 0
+}
+5:4/0 = 0
+5:4/0/texture_origin = Vector2i(0, 16)
+5:4/0/metadata/_better_terrain = {
+8: [0],
+"type": 0
+}
+3:2/0 = 0
+3:2/0/texture_origin = Vector2i(0, 16)
+3:2/0/metadata/_better_terrain = {
+0: [0],
+12: [0],
+"type": 0
+}
+4:2/0 = 0
+4:2/0/texture_origin = Vector2i(0, 16)
+4:2/0/metadata/_better_terrain = {
+0: [0],
+8: [0],
+12: [0],
+"type": 0
+}
+5:2/0 = 0
+5:2/0/texture_origin = Vector2i(0, 16)
+5:2/0/metadata/_better_terrain = {
+8: [0],
+12: [0],
+"type": 0
+}
+3:1/0 = 0
+3:1/0/texture_origin = Vector2i(0, 16)
+3:1/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+12: [0],
+"type": 0
+}
+4:1/0 = 0
+4:1/0/texture_origin = Vector2i(0, 16)
+4:1/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+8: [0],
+12: [0],
+"type": 0
+}
+5:1/0 = 0
+5:1/0/texture_origin = Vector2i(0, 16)
+5:1/0/metadata/_better_terrain = {
+4: [0],
+8: [0],
+12: [0],
+"type": 0
+}
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 16)
+3:0/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+"type": 0
+}
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, 16)
+4:0/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+8: [0],
+"type": 0
+}
+5:0/0 = 0
+5:0/0/texture_origin = Vector2i(0, 16)
+5:0/0/metadata/_better_terrain = {
+4: [0],
+8: [0],
+"type": 0
+}
+7:0/0 = 0
+7:0/0/texture_origin = Vector2i(0, 16)
+7:0/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+8: [0],
+11: [0],
+12: [0],
+"type": 0
+}
+8:0/0 = 0
+8:0/0/texture_origin = Vector2i(0, 16)
+8:0/0/metadata/_better_terrain = {
+0: [0],
+3: [0],
+4: [0],
+8: [0],
+"type": 0
+}
+10:0/0 = 0
+10:0/0/texture_origin = Vector2i(0, 16)
+10:0/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+7: [0],
+8: [0],
+12: [0],
+15: [0],
+"type": 0
+}
+9:0/0 = 0
+9:0/0/texture_origin = Vector2i(0, 16)
+9:0/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+7: [0],
+8: [0],
+"type": 0
+}
+10:1/0 = 0
+10:1/0/texture_origin = Vector2i(0, 16)
+10:1/0/metadata/_better_terrain = {
+4: [0],
+7: [0],
+8: [0],
+12: [0],
+"type": 0
+}
+9:1/0 = 0
+9:1/0/texture_origin = Vector2i(0, 16)
+9:1/0/metadata/_better_terrain = {
+0: [0],
+3: [0],
+4: [0],
+7: [0],
+8: [0],
+11: [0],
+12: [0],
+"type": 0
+}
+8:1/0 = 0
+8:1/0/texture_origin = Vector2i(0, 16)
+8:1/0/metadata/_better_terrain = {
+0: [0],
+3: [0],
+4: [0],
+7: [0],
+8: [0],
+12: [0],
+15: [0],
+"type": 0
+}
+7:1/0 = 0
+7:1/0/texture_origin = Vector2i(0, 16)
+7:1/0/metadata/_better_terrain = {
+0: [0],
+3: [0],
+4: [0],
+12: [0],
+"type": 0
+}
+7:2/0 = 0
+7:2/0/texture_origin = Vector2i(0, 16)
+7:2/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+12: [0],
+15: [0],
+"type": 0
+}
+8:2/0 = 0
+8:2/0/texture_origin = Vector2i(0, 16)
+8:2/0/metadata/_better_terrain = {
+0: [0],
+3: [0],
+4: [0],
+8: [0],
+11: [0],
+12: [0],
+15: [0],
+"type": 0
+}
+9:2/0 = 0
+9:2/0/texture_origin = Vector2i(0, 16)
+9:2/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+7: [0],
+8: [0],
+11: [0],
+12: [0],
+15: [0],
+"type": 0
+}
+10:2/0 = 0
+10:2/0/texture_origin = Vector2i(0, 16)
+10:2/0/metadata/_better_terrain = {
+4: [0],
+8: [0],
+11: [0],
+12: [0],
+"type": 0
+}
+10:3/0 = 0
+10:3/0/texture_origin = Vector2i(0, 16)
+10:3/0/metadata/_better_terrain = {
+0: [0],
+3: [0],
+4: [0],
+8: [0],
+12: [0],
+"type": 0
+}
+9:3/0 = 0
+9:3/0/texture_origin = Vector2i(0, 16)
+9:3/0/metadata/_better_terrain = {
+0: [0],
+8: [0],
+11: [0],
+12: [0],
+"type": 0
+}
+8:3/0 = 0
+8:3/0/texture_origin = Vector2i(0, 16)
+8:3/0/metadata/_better_terrain = {
+0: [0],
+8: [0],
+12: [0],
+15: [0],
+"type": 0
+}
+7:3/0 = 0
+7:3/0/texture_origin = Vector2i(0, 16)
+7:3/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+7: [0],
+8: [0],
+12: [0],
+"type": 0
+}
+
+[sub_resource type="TileSet" id="TileSet_nbejc"]
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_hwgnq")
+metadata/_better_terrain = {
+"decoration": ["Decoration", Color(0.411765, 0.411765, 0.411765, 1), 3, [], {
+"path": "res://addons/better-terrain/icons/Decoration.svg"
+}],
+"terrains": [["WallsLight", Color(0.635294, 0.14902, 0.854902, 1), 0, [], {
+"path": ""
+}]],
+"version": "0.2"
+}
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(86, 63)
+texture = ExtResource("1_y5l7l")
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_nbejc")
+format = 2
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(-393205, 196608, 0, -327669, 65536, 1, -262133, 65536, 1, -196597, 65536, 1, -131061, 196608, 1, -65525, 65536, 1, 11, 65536, 1, 65547, 65536, 1, 131083, 65536, 1, 196619, 196608, 2, -393198, 262144, 4, -393199, 262144, 4, -393200, 262144, 4, -393201, 262144, 0, -393202, 262144, 4, -393203, 262144, 4, -393204, 262144, 4, -327665, 65536, 1, -262129, 65536, 1, -196593, 65536, 1, -131057, 262144, 1, -65521, 65536, 1, 15, 65536, 1, 65551, 65536, 1, 131087, 65536, 1, -131060, 262144, 4, -131059, 262144, 4, -131058, 262144, 4, -131056, 262144, 4, -131055, 262144, 4, -131054, 262144, 4, -131053, 327680, 1, 131091, 65536, 1, 65555, 65536, 1, 19, 65536, 1, -65517, 65536, 1, -196589, 65536, 1, -262125, 65536, 1, -327661, 65536, 1, -393197, 327680, 0, 196620, 262144, 4, 196621, 262144, 4, 196622, 262144, 4, 196623, 262144, 2, 196624, 262144, 4, 196625, 262144, 4, 196626, 262144, 4, 196627, 327680, 2, -524264, 327680, 0, -524265, 196608, 0, -458729, 196608, 2, -458728, 458752, 0, -393192, 65536, 1, -327656, 65536, 1, -262120, 458752, 1, -196584, 458752, 2, -131048, 65536, 1, -65512, 65536, 1, 24, 65536, 1, 65560, 65536, 1, 131096, 458752, 3, 131095, 196608, 0, 196631, 196608, 2, 196632, 327680, 2, 131097, 262144, 4, 131098, 262144, 4, 131099, 262144, 4, 131100, 524288, 3, 131101, 589824, 3, 131102, 262144, 4, 131103, 262144, 4, 131104, 655360, 3, -458727, 262144, 4, -458726, 262144, 4, -458725, 262144, 4, -458724, 524288, 0, -458723, 589824, 0, -458722, 262144, 4, -458721, 262144, 4, -458720, 524288, 3, -524256, 196608, 0, -524255, 327680, 0, -458719, 327680, 2, -393184, 65536, 1, -327648, 65536, 1, -262112, 655360, 1, -196576, 655360, 2, -131040, 65536, 1, -65504, 65536, 1, 32, 65536, 1, 65568, 65536, 1, 196640, 196608, 2, 196641, 327680, 2, 131105, 327680, 0, -262119, 524288, 0, -262118, 589824, 0, -262117, 524288, 0, -262116, 524288, 1, -262115, 589824, 1, -262114, 589824, 0, -262113, 524288, 0, -196583, 524288, 3, -196582, 524288, 3, -196581, 524288, 3, -196580, 524288, 2, -196579, 589824, 2, -196578, 524288, 3, -196577, 524288, 3, -327652, 458752, 2, -393188, 458752, 1, -131044, 458752, 2, -65508, 458752, 1, 28, 458752, 2, 65564, 458752, 1, -393187, 655360, 1, -327651, 655360, 1, -131043, 655360, 1, -65507, 655360, 1, 29, 655360, 2, 65565, 655360, 1, 196616, 65536, 4, -65528, 65536, 2, -131064, 65536, 1, -196600, 65536, 1, -262136, 65536, 1, -327672, 65536, 1, -393208, 65536, 1, -458744, 65536, 0, 458760, 196608, 4, 458761, 262144, 4, 458762, 262144, 4, 458763, 262144, 4, 458764, 327680, 4)
