@@ -1,0 +1,7 @@
+res://mathtest.tscn
+res://mathtest.gd
+res://mapgen.tscn
+res://mazewalltilemap.tscn
+res://gateways/gateway0.tscn
+res://gateways/gateway1.tscn
+res://mapgen.gd

@@ -17,7 +17,7 @@ script = ExtResource("1_yylh3")
 
 [node name="TileMap" parent="." instance=ExtResource("2_guwon")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(0.25, 0.25)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
