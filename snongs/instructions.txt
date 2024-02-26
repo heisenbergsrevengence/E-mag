@@ -1,2 +1,0 @@
-when you upload songs , splice the orignal into parts like, songnamefirstpart, songnameendpart,songnamedrumsolo,songnamedrumplusendpart, etc etc in a folder in git
-Thisll make it easier to use in godot
